@@ -84,14 +84,14 @@
 }
 
 .dark {
-  /* DesignPulse custom dark theme — Linear/Vercel aesthetic */
+  /* Sift custom dark theme — Linear/Vercel aesthetic */
   --background: #0A0A0B;           /* --midnight */
   --foreground: #FAFAFA;            /* --dawn-white */
   --card: #1A1A1D;                  /* --slate */
   --card-foreground: #FAFAFA;
   --popover: #1A1A1D;
   --popover-foreground: #FAFAFA;
-  --primary: #3B82F6;               /* --pulse-blue */
+  --primary: #3B82F6;               /* --signal-blue */
   --primary-foreground: #FFFFFF;
   --secondary: #222225;             /* --elevated */
   --secondary-foreground: #FAFAFA;

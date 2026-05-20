@@ -42,7 +42,7 @@ Primary screen. What user sees every morning.
 **Input channels:**
 - Parse video (YouTube URL → transcript + screenshots + AI summary → digest card)
 - Parse URL (any article/GitHub → extract text + AI summary → digest card)
-- Forward via Telegram (forward message to @DesignPulseBot → agent processes → digest card)
+- Forward via Telegram (forward message to @SiftBot → agent processes → digest card)
 - Upload file (PDF/doc → extract text + summary) — future
 
 ### 2. Sources (/sources)
@@ -79,7 +79,7 @@ Two-tab structure:
 Internal page — living component gallery, source of truth for all UI elements.
 
 **Sections:**
-- **Tokens** — color palette (all --midnight, --slate, --pulse-blue etc. with swatches), typography scale (Geist Sans/Mono sizes and weights), spacing scale (8px base)
+- **Tokens** — color palette (all --midnight, --slate, --signal-blue etc. with swatches), typography scale (Geist Sans/Mono sizes and weights), spacing scale (8px base)
 - **Base components** — ShadCN components with custom theme: Button (variants + states), Input, Checkbox, Toggle, Badge, Tabs, Sidebar
 - **Custom components** — DigestCard (all states: default, useful-marked, hidden, with source type badges), FilterDropdown (with channel checkboxes), PendingItem (with spinner), SourceRow (with priority badge + toggle), YouTubeParseModal, TelegramForwardModal
 - **Patterns** — card actions bar, search bar, filter bar, page header with action buttons

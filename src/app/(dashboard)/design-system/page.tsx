@@ -11,7 +11,7 @@ const colors = [
   { name: "--dawn-white", value: "#FAFAFA", usage: "Primary text, headings" },
   { name: "--secondary", value: "#A0A0A0", usage: "Secondary text, metadata" },
   { name: "--muted", value: "#555555", usage: "Disabled, hints, timestamps" },
-  { name: "--pulse-blue", value: "#3B82F6", usage: "Accent, links, priority-high" },
+  { name: "--signal-blue", value: "#3B82F6", usage: "Accent, links, priority-high" },
   { name: "--success", value: "#22C55E", usage: "Mark useful, confirmations" },
   { name: "--warning", value: "#F59E0B", usage: "Priority-medium, alerts" },
 ];
@@ -110,7 +110,7 @@ export default function DesignSystemPage() {
       {/* === BASE COMPONENTS === */}
       <section className="mb-12">
         <h2 className="text-lg font-semibold mb-4">Base components</h2>
-        <p className="text-sm text-[#A0A0A0] mb-6">ShadCN components with DesignPulse dark theme.</p>
+        <p className="text-sm text-[#A0A0A0] mb-6">ShadCN components with Sift dark theme.</p>
 
         {/* Buttons */}
         <div className="mb-8">

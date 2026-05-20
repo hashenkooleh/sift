@@ -1,4 +1,4 @@
-# DesignPulse
+# Sift
 
 Intelligence layer for designers. Aggregates content from Telegram channels, YouTube, and web sources into a structured daily digest with AI summaries.
 
@@ -22,12 +22,12 @@ Dark theme, Linear/Vercel aesthetic. Luxury/refined, not brutalist.
 - Surfaces: #1A1A1D (--slate)
 - Borders: #2A2A2D 1px (--border). No shadows except modals.
 - Text: #FAFAFA primary, #A0A0A0 secondary, #555555 muted
-- Accent: #3B82F6 (--pulse-blue). Single accent color only.
+- Accent: #3B82F6 (--signal-blue). Single accent color only.
 - Typography: Geist Sans for UI, Geist Mono for metadata/timestamps
 - Spacing: 8px base unit
 - Border radius: 6-8px (rounded but not pill-shaped)
 
-Token names must be domain-specific: `--midnight`, `--slate`, `--pulse-blue`, `--dawn-white`. Never `--gray-700` or `--surface-2`.
+Token names must be domain-specific: `--midnight`, `--slate`, `--signal-blue`, `--dawn-white`. Never `--gray-700` or `--surface-2`.
 
 ## Design system
 
