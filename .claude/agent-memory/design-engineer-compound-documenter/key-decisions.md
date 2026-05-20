@@ -1,0 +1,38 @@
+# Key decisions log
+
+Decisions that affect multiple downstream deliverables. Append-only – older entries are valuable for understanding why current choices were made.
+
+## 2026-05-14
+
+- **UX/UI designers only, not broader IT** – narrows persona, competitor positioning, all future copy. Affects: target-audience, assumptions, competitor-analysis, storybrand, mvp-requirements.
+- **AI as intelligence layer, not "second brain"** – product positioning and differentiation hinge on this framing; "second brain" is saturated and carries wrong connotations. Affects: storybrand, competitor-analysis, all future marketing copy, mvp-requirements.
+- **Manual source curation with priority levels** – user controls what gets aggregated; no auto-scraping. Affects: assumptions (P1-P6), mvp-requirements, UX design patterns.
+- **Pet project for personal use first** – ship to self before external users; affects pricing strategy (no monetization pressure in MVP), business assumptions, MVP scope.
+- **Telegram integration is the key moat** – verified working at time of competitor analysis; zero competitors support it natively. Affects: competitor positioning, mvp-requirements, storybrand differentiation angle.
+
+## 2026-05-14 – Phase 3 (planning)
+
+- **Claude Code agent as AI backend** – $0 extra cost, reuses existing Anthropic subscription. Affects: tech-stack, mvp-requirements, business-plan cost model, all future dev decisions.
+- **Archive auto-expire: single mentions 2 weeks, repeated patterns retained longer** – keeps archive lean without losing signal; distinction between noise and emerging pattern is built into retention logic. Affects: ia data model, mvp-requirements, archive UX.
+- **Knowledge Base = user-curated "useful" items, persists indefinitely** – explicit user action ("mark useful") as the curation signal; no auto-inference. Affects: ia data model, mvp-requirements F5/F6, all Knowledge Base UX flows.
+- **UI language English, AI-generated content language Ukrainian** – product surface is English; digest/summary output is Ukrainian to match user's primary reading context. Affects: all screen copy, IA labels, storybrand tone, future onboarding.
+- **Sources as separate page, not nested under Settings** – Sources is a primary workflow surface; burying it in Settings would reduce discoverability and daily use. Affects: ia nav structure, all screen designs.
+- **GitHub integration to parking lot** – new idea surfaced during IA; needs research before committing. Affects: mvp-requirements scope (excluded for now), future roadmap.
+
+## 2026-05-14 – Phase 4 (design & validation, shortened)
+
+- **Dark theme (Linear/Vercel style) as default** – explicit choice against warm/approachable aesthetic; luxury/refined dark variant. Geist Sans/Mono typography. Palette: #0A0A0B bg, #1A1A1D surfaces, #3B82F6 accent. Affects: prototype, all future screen designs, figma-workflow if run, component tokens.
+- **Cards format for digest (not table or timeline)** – chosen as primary content display pattern. Affects: prototype layout, figma-workflow, all dev screen implementations.
+- **Two input channels: UI buttons (Parse video, Parse URL) + Telegram forward to bot** – dual entry model; no other ingestion methods in MVP. Affects: mvp-requirements (confirm alignment), ia (stale – see stale-dependents), all dev screens.
+- **Pending queue pattern for async processing** – items enter a visible pending state before appearing in digest. Affects: ia (stale), prototype, all dev data-flow implementation.
+- **Filter dropdowns per source type (Telegram/YouTube/Web) with per-channel checkboxes** – granular source filtering at the channel level. Affects: ia (stale), prototype, dev filter/query logic.
+- **Source type badges on cards (TG, YT, Web)** – visual provenance signal on every digest card. Affects: prototype, dev card component.
+- **bias-audit, journey-map, motivation-audit, ethics-review, product-assessment all skipped** – advisor recommendation: overhead not justified for a pet project. Phase 4 shortened to design-references + prototype only. Affects: pipeline sequence (Phase 5 starts directly after prototype).
+
+## 2026-05-14 – Phase 2 (strategy)
+
+- **Telegram-bot as digest delivery channel** – ride existing habit rather than building a new surface. Zone A analysis confirmed prompt is the weakest lever; delivery channel is where friction is lowest. Affects: mvp-requirements, ia, storybrand delivery story, all UX flows.
+- **AI layer deferred to post-MVP** – manual curation ships first; AI assistance added only after 90-day dogfood proves the core loop works. Prevents scope creep and keeps MVP in the 2-week target window. Affects: mvp-requirements, business-plan roadmap, tech-stack choices.
+- **Success metric = daily use for 90 days, not revenue** – pet project framing; no monetization pressure in v1. Affects: mvp-requirements acceptance criteria, business-plan KPIs, feature prioritization.
+- **8h/week time budget (6h features + 2h maintenance)** – hard constraint that governs feature scope and MVP definition. Affects: mvp-requirements, ia scope, all future sprint planning.
+- **MVP in 2 weeks → 30-day dogfood → open to 3–5 colleagues free** – phased rollout locks release sequencing. Affects: mvp-requirements, ia, go-to-market sequencing.
