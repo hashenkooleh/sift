@@ -35,6 +35,14 @@ Decisions that affect multiple downstream deliverables. Append-only – older en
 - **Accent token renamed --pulse-blue → --signal-blue** – CLAUDE.md requires domain-specific token names; "signal" fits Sift's concept of surfacing signal from noise, "pulse" was tied to the old product name. Affects: globals.css, design-system page, prototype.html, all components using the accent color.
 - **GitHub repo is public** – user chose public over the recommended private repo. Strategy documents (business-plan.md, competitor-analysis.md) are now publicly visible on GitHub. Affects: what external parties can see; treat those files as effectively public going forward.
 
+## 2026-05-21
+
+- **Linear is the single aesthetic spine for Sift** – reference set narrowed from 5 apps to 4; Linear chosen as the primary visual reference, not just one of several. Affects: references.md, design-system.md, all future UI decisions, prototype reference framing.
+- **Accent changed from #3B82F6 (--signal-blue) to #5E6AD2 (--signal), Linear indigo** – old blue was a generic Bootstrap/Tailwind colour; Linear indigo is more refined and on-brand. Token renamed --signal-blue → --signal. Fully propagated across globals.css, src/, /design-system page, CLAUDE.md, and all design deliverables. Affects: every file touching the accent colour token.
+- **Three-layer token architecture adopted** – Layer 1: raw domain tokens (--midnight, --slate, --signal, --dawn-white, --faint, --whisper); Layer 2: ShadCN role-name aliases (--background, --foreground, --primary, etc.) that map to Layer 1; Layer 3: per-component overrides. Affects: globals.css, all components, any future token additions.
+- **Tertiary text raised from #555555 to #8A8A8A (--faint) for WCAG AA** – #555555 on #0A0A0B fails contrast (3.5:1); #8A8A8A passes AA at 4.6:1. Old value logged in memory as a known failure. Affects: globals.css muted token, any component using muted/tertiary text, design-system documentation.
+- **Figma stays a visual helper only; Sift remains code-first** – Figma MCP was connected (OAuth) and prototype pushed to file g8hBtHVY9zHNzuNQH7G1yH as a learning pass. Decision confirmed: Figma is a reference and communication tool, not the source of truth. Affects: ui-figma-guide classification (exploratory, not a pipeline requirement), future workflow expectations.
+
 ## 2026-05-14 – Phase 2 (strategy)
 
 - **Telegram-bot as digest delivery channel** – ride existing habit rather than building a new surface. Zone A analysis confirmed prompt is the weakest lever; delivery channel is where friction is lowest. Affects: mvp-requirements, ia, storybrand delivery story, all UX flows.

@@ -1,78 +1,149 @@
 # Design references and direction
 
+Refreshed 2026-05-21. This replaces the earlier version. The big change: Linear is now the single aesthetic spine, the reference set was narrowed from five apps to four, and the accent moved to Linear's indigo.
+
 ## Design intent
 
-**Who:** Андрій, фрілансер-дизайнер. Вранці з кавою, ноутбук відкритий. У голові — задачі від клієнтів.
+**Who:** Андрій, фрілансер-дизайнер, мідл–сеньйор. Вранці з кавою, ноутбук відкритий, у голові вже клієнтські задачі.
 
-**What must he do:** За 15 хвилин побачити що нового в індустрії, відмітити корисне, закрити і піти працювати.
+**What he must do:** За 15 хвилин зробити тріаж нового в індустрії, відмітити корисне, закрити застосунок, піти працювати.
 
-**Feel:** Cold and precise, polished. Dark SaaS — як Linear: чисто, щільно, кожна деталь продумана.
+**Feel:** Cold and precise. Темний, точний, приладовий. Кожна деталь продумана, інструмент не привертає уваги до себе.
 
 ## Bold aesthetic flavor
 
-Luxury / refined (dark variant). Generous whitespace на темному фоні. Subtle motion. Quiet confidence. Refined engineering aesthetic, not raw brutalism.
+Luxury / refined, dark variant. Стриманість, тиха впевненість, дисципліна замість ефектів. Не brutalism, не декор. Якість тут читається через точність, а не через прийоми.
 
-## Reference apps
+## Primary reference: Linear
 
-### Linear (linear.app)
-**Take:** Dark theme palette, smooth animations, sidebar navigation, clean typography на темному фоні, subtle 1px borders замість shadows, command-palette UX pattern, issue card layout → digest card layout.
+Linear узято за єдиний естетичний хребет. Рішення копіюються з Linear настільки близько, наскільки це має сенс для контент-дайджесту. Решта три референси (нижче) вторинні. До них звертаємось тільки там, де Linear прямого рішення не дає.
 
-### Vercel (vercel.com)
-**Take:** Gradient accents (purple-blue), contrast hierarchy, Geist typeface family (Sans + Mono), polished but technical feel, deployment card pattern → digest summary pattern.
+Копіюємо **систему** Linear, не макети. Linear це трекер задач: kanban, issue-картки, three-pane. Sift це контент-дайджест. Тому беремо токени, модель глибини, типографічне трактування, monospace-дисципліну і ритм «щільність усередині панелей, повітря між секціями», а самі макети будуємо під реальні екрани Sift. Референс це app-UI Linear, не маркетинговий сайт.
 
-### Brief Digest (briefdigest.news)
-**Take:** Digest card with "N sources merged" badge, compact summary format, source attribution row (Reuters | BBC | TechCrunch → Channel A | Channel B), clean feed structure, AI clustering visualization.
+Захоплення: `./references/captures/linear/` (hero + 3 секції, маніфест на місці).
 
-### Avoid
-- Feedly's enterprise density and cluttered UI
-- Readwise's deep-work reading-mode complexity
-- Generic light-theme SaaS templates
-- "Warm and cozy" aesthetic — this is a tool, not a notebook
-- Excessive gradients or glassmorphism
+З Linear беремо:
 
-## Design tokens
+- True near-black полотно. 1px hairline-роздільники роблять усю структурну роботу: навігація, колонки, панелі. Тіней немає ніде, крім однієї плаваючої картки.
+- Двотонний текст: білий лід плюс приглушене продовження того ж кеглю. Ієрархія без зміни розміру.
+- Monospace на кожен шматок метаданих: ID задач, мітки `FIG 0.2`, лічильники (`Todo 71`), таймстемпи. Це прямо лягає на правило Geist Mono в Sift.
+- Статус це малий кольоровий dot плюс лейбл. Пріоритет це крихітний гліф. Семантичний колір вживається скупо.
+- Щільність живе всередині панелей, спокій між секціями. Щедрі вертикальні відступи навіть у power-tool.
 
-### Palette (dark theme)
+## Secondary references
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| --bg-primary | #0A0A0B | Main background |
-| --bg-surface | #1A1A1D | Cards, sidebar |
-| --bg-elevated | #222225 | Hover states, active items |
-| --border | #2A2A2D | Subtle borders (1px) |
-| --text-primary | #FAFAFA | Headings, primary content |
-| --text-secondary | #A0A0A0 | Timestamps, metadata |
-| --text-muted | #666666 | Disabled, hints |
-| --accent | #3B82F6 | Primary action, links, priority-high badge |
-| --accent-subtle | #3B82F620 | Accent backgrounds (12% opacity) |
-| --success | #22C55E | "Mark useful" confirmation |
-| --warning | #F59E0B | Priority-medium badge |
+Вторинні. Консультуємось лише там, де Linear мовчить.
 
-### Typography
+**Raycast** — `./references/captures/raycast/`. Інлайн-двотон у фразах: жирне слово-зачин плюс приглушений хвіст («Fast. Think in milliseconds.»). Корисно для лейблів digest-карток. Один яскравий акцент має право бути енергійним, бо все інше монохром на чорному. Command-palette як першокласна навігаційна поверхня. Кадри 01–03 вийшли дрібними через scroll-анімацію сайту, 04 повноцінний.
 
-| Element | Font | Size | Weight |
-|---------|------|------|--------|
-| Page title | Geist Sans | 24px | 600 |
-| Section heading | Geist Sans | 18px | 600 |
-| Card title | Geist Sans | 16px | 500 |
-| Body text | Geist Sans | 14px | 400 |
-| Metadata | Geist Mono | 12px | 400 |
-| Badge | Geist Sans | 11px | 500 |
+**Retool** — `./references/captures/retool/`. Homepage темний, Linear-adjacent. Беремо monospace технічні лейбли приладового регістру («STATUS: KERNEL RUNNING», термінальне «> RESOLVING…»). Це регістр для системних станів Sift: ETA в pending-queue, статус обробки агентом. Тонколінійні монохромні діаграми теж звідси. 3D-ізо-рендери Retool не беремо, це декор.
 
-### Spacing
+**Notion Calendar** — `./references/captures/notion-calendar/`. Тільки структура, не естетика. Маркетинговий сайт світлий і грайливий, що протилежне напряму Sift. Беремо щільний agenda-поповер: багато time-stamped рядків через hairline, глибина через тональні зсуви. Це ритм для стрічки Digest і списку Archive. Беремо також сітку feature-карток для Settings і empty states.
 
-Base unit: 8px. Card padding: 16px. Gap between cards: 12px. Sidebar width: 240px.
+### Dropped from the previous version
 
-### Depth
+Vercel і Brief Digest прибрано. Vercel давав «Geist плюс бурштиновий акцент», але Geist уже зафіксований у `CLAUDE.md`, а акцент тепер індиго Linear, тож референс втратив сенс. Brief Digest за логіном, продуктовий UI публічно недоступний, а сигнатуру ми визначаємо з власної IA Sift.
 
-Practically flat. 1px borders (#2A2A2D). Minimal shadows (only modals/dropdowns). Hover = background shift to --bg-elevated.
+## Product type and context
 
-## Signature element
+Веб-застосунок. Next.js 15, App Router. Sidebar-навігація, desktop-first, responsive до телефону. Максимум 2 рівні глибини. Домен: продуктивність, професійний intelligence-інструмент для дизайнерів.
 
-Digest card: dark surface (#1A1A1D) with 1px border (#2A2A2D), accent badge for priority level, clean source attribution row in Geist Mono. Like a Linear issue card adapted for content digest.
+## Domain exploration
 
-## Named defaults to avoid
+### Domain
 
-1. White background SaaS template — generic, no character
-2. Card shadows instead of borders — too soft for this aesthetic
-3. Rainbow color coding — only one accent + semantic colors
+| Концепт | Що це у світі Sift |
+|---|---|
+| Просіювання, сито | Сама назва. Тонкий сигнал відділяється від грубої маси. У MVP сито це пріоритет-ранжування плюс AI-дистиляція. |
+| Ранковий брифінг | О 08:00 Андрій читає денне зведення як аналітик. Спокійне, скінченне. |
+| Сигнал крізь шум | Детекція чистого сигналу серед шуму джерел. |
+| Дистиляція | Сирі повідомлення каналу перетворюються на 3–5 речень AI-саммарі. |
+| Пріоритет джерела | high / medium / low. Дайджест ранжований, не хронологічний. |
+| Куратор-одинак | Андрій сам собі research-відділ. Sift його джуніор-аналітик. |
+
+Несвіжість, суперечності, напіврозпад знання належать довгостроковому баченню продукту. Для MVP це parking lot, тож у візуальну сигнатуру вони не йдуть.
+
+### Color world
+
+Фізичний простір домену: передсвітанковий стіл о 08:00, світло екрана, приладова панель.
+
+| Колір домену | Токен | Звідки |
+|---|---|---|
+| Передсвітанковий чорно-синій | `--midnight #0A0A0B` | Небо до сходу. Не чистий чорний, холодний. |
+| Холодне світло екрана | `--dawn-white #FAFAFA` | Дисплей у темній кімнаті. |
+| Індиго сигналу | `--signal #5E6AD2` | Акцент Linear. Чистий індикатор серед монохрому. |
+| Графіт, сталь сита | `--slate #1A1A1D`, `--border #2A2A2D` | Холодний матовий метал, сітка сита. |
+| Бурштин уваги | `--warning #F59E0B` | Medium-пріоритет, тихий індикатор. |
+| Зелений «зловлено» | `--success #22C55E` | Підтвердження «корисно». |
+
+Тепло кавової пари свідомо виключено. Кава в кадрі є, але теплі тони в палітру не пускаємо.
+
+### Signature element
+
+Просіяна digest-картка. Тіло картки це AI-дистиляція на 3–5 речень, не сирі пости. Картка несе рядок атрибуції джерела в Geist Mono, сигнал пріоритету (high/medium/low) і таймстемп. Стрічка, у якій картка живе, ранжована за пріоритетом, не хронологічно. Це ранжування і є просіювання.
+
+Тест на видалення назви: «стрічка AI-дистиляцій, ранжована за пріоритетом джерела, де ти відмічаєш корисне» впізнається як інструмент тріажу, не соцмережа. Тест пройдено.
+
+Сигнатура живе на екрані Digest і повторюється в Archive.
+
+### Named defaults to avoid
+
+1. Нескінченна соцмережна стрічка. Безкінечний reverse-chron скрол для утримання в застосунку. Ціль Sift протилежна: Андрій іде за 15 хвилин. Дайджест має відчуватись скінченним.
+2. Непрочитане-як-борг. Червоні badge «247 unread», inbox-zero тривога. Це робить базу знань боргом. Без лічильників провини.
+3. Пласка рівна стрічка. Усі айтеми рівної ваги, newest-first. Sift ранжує за пріоритетом.
+4. Наліпка «AI Summary» зі спарклом і градієнтом. Дистиляція це рідна субстанція картки, не декорований додаток.
+5. Білий шаблон SaaS, тіні замість бордерів, веселкове кодування. Перенесено з попередньої версії, чинне.
+
+## Key screens and visual direction
+
+**Sidebar / shell.** Sidebar Linear копіюється 1:1. Workspace-перемикач зверху, групи пунктів з малими монохромними гліфами, секційні лейбли (`Workspace`, `Favorites`) крихітним muted-капсом. Ширина 240px, поверхня `--slate`, 1px правий бордер, hover дає тональний зсув. Активний пункт підсвічений індиго.
+
+**Digest і digest-картка.** Issue-list Linear стає стрічкою дайджесту. Картка це issue-картка Linear, адаптована: рядок метаданих (badge джерела TG/YT/Web, dot пріоритету, назва джерела, таймстемп) у Geist Mono; title і дистиляція в Geist Sans; рядок дій (Mark useful, View original, Hide). Стрічка ранжована за пріоритетом. Pending queue зверху використовує activity-трактування Linear зі спінером і monospace-ETA. Фільтр-бар це filter-дропдауни Linear. Індиго йде на high-priority dot, первинні дії, focus-стан.
+
+**Sources і Archive.** SourceRow це settings-рядок Linear: назва, тип, priority-badge, enable-toggle, щільні рядки з hairline-роздільниками. Archive використовує табовий патерн Linear (Knowledge Base, Recent). Ритм щільного списку звіряємо з agenda-поповером Notion Calendar.
+
+**Modals.** YouTubeParseModal і TelegramForwardModal це модалка Linear: центрована, поверхня `--slate`, 1px бордер. Модалки і дропдауни це єдине місце, де дозволена тінь. Monospace на URL і системний текст.
+
+## WHY checkpoint
+
+**Palette.**
+
+| Токен | Значення | Чому |
+|---|---|---|
+| `--midnight` | `#0A0A0B` | Передсвітанковий чорно-синій. True near-black, як полотно Linear, дає hairline-бордерам і акценту читатись чисто. Сірий читався б шаблоном. |
+| `--slate` | `#1A1A1D` | Поверхні на тон вище фону. Глибина через тон. |
+| `--elevated` | `#222225` | Hover і active. Інтеракція через тональний зсув, без тіні. |
+| `--border` | `#2A2A2D` | 1px. Бордери роблять усю структурну роботу. Один регістр глибини. |
+| `--dawn-white` | `#FAFAFA` | Primary-текст. |
+| `--text-secondary` | `#A0A0A0` | Muted-продовження двотону. Той самий кегль, що й primary. |
+| `--text-muted` | `#8A8A8A` | Піднято з `#666666`. Стандарт DS проєкту це WCAG AA, а `#666666` на `#0A0A0B` контраст не проходить. |
+| `--signal` | `#5E6AD2` | Єдиний акцент, індиго Linear. Перейменовано з `--signal-blue`: значення тепер індиго, тож «blue» у назві стало неточним. Доменний сенс «сигнал» лишається. |
+| `--accent-subtle` | `#5E6AD220` | Фон акценту, 12% прозорості. |
+| `--success` | `#22C55E` | Підтвердження «корисно». Тільки статус. |
+| `--warning` | `#F59E0B` | Medium-пріоритет. Тільки статус. |
+
+**Depth.** Бордери, не тіні. 1px `--border`. Тіні дозволені лише на модалках і дропдаунах. Cold and precise означає пласке, приладове. Тінь додала б мʼякість, яку інтенція відкидає.
+
+**Surfaces.** Холодна 3-крокова елевація: `#0A0A0B` → `#1A1A1D` → `#222225`. Температура холодна, не тепло-сіра. Теплий сірий читається як «cozy», а Sift це холодний інструмент.
+
+**Typography.** Geist Sans для UI, Geist Mono для метаданих. Зафіксовано в `CLAUDE.md`. Geist це чистий геометричний гротеск того ж регістру, що й гарнітура Linear, тож копіюємо трактування Linear (tight leading, двотон, mono на ID, таймстемпи, лічильники), а не саму гарнітуру.
+
+**Spacing.** Базова одиниця 8px. Card padding 16px, gap між картками 12px, sidebar 240px. 8px-ритм це дисципліна точного інструменту.
+
+## Overall visual direction
+
+Sift це контент-дайджест у системі Linear: true near-black полотно, 1px hairline-бордери замість тіней, monospace на всі метадані, єдиний індиго-акцент, двотонний текст. Щільність живе всередині панелей, повітря між секціями. Інструмент іде з дороги, щоб Андрій закрив його за 15 хвилин.
+
+## What not to do
+
+- Не використовувати glassmorphism. Заборонено `CLAUDE.md`, узгоджено цього сеансу.
+- Не копіювати макети Linear буквально. Копіюється система, не kanban.
+- Не вводити тіні поза модалками і дропдаунами.
+- Не додавати другий акцент чи веселкове кодування. Один індиго плюс семантичні success і warning.
+- Не світла тема ніде.
+- Не тягнути сторонні шрифти. Тільки Geist.
+- Не брати 3D-рендери Retool чи світлу грайливу естетику Notion Calendar.
+
+## Reconciliation status
+
+Закрито 2026-05-21 під час `ui-design-system`: акцент `--signal #5E6AD2` і фікс muted (`--faint #8A8A8A`) розкатано по `globals.css`, `src/`, сторінці `/design-system` і `CLAUDE.md`. Токен `--signal-blue` перейменовано на `--signal`. Незакритих пунктів сесії немає. `prototype.html` лишається замороженим layout-референсом за свідомим рішенням сесії.

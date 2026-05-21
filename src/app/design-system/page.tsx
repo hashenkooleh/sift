@@ -54,7 +54,7 @@ const colorTokens = [
   { swatch: "bg-border", name: "--border", value: "#2A2A2D", usage: "1px borders and dividers" },
   { swatch: "bg-foreground", name: "--foreground", value: "#FAFAFA", usage: "Primary text (dawn-white)" },
   { swatch: "bg-muted-foreground", name: "--muted-foreground", value: "#A0A0A0", usage: "Secondary text, metadata" },
-  { swatch: "bg-primary", name: "--primary", value: "#3B82F6", usage: "Accent, links, focus (signal-blue)" },
+  { swatch: "bg-primary", name: "--primary", value: "#5E6AD2", usage: "Accent, links, focus (aliases --signal, Linear indigo)" },
   { swatch: "bg-destructive", name: "--destructive", value: "#EF4444", usage: "Errors, destructive actions" },
   { swatch: "bg-chart-2", name: "--chart-2", value: "#22C55E", usage: "Success, confirmations" },
   { swatch: "bg-chart-3", name: "--chart-3", value: "#F59E0B", usage: "Warning, medium priority" },

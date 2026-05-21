@@ -29,6 +29,7 @@
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
+  --color-faint: var(--faint);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -84,38 +85,56 @@
 }
 
 .dark {
-  /* Sift custom dark theme — Linear/Vercel aesthetic */
-  --background: #0A0A0B;           /* --midnight */
-  --foreground: #FAFAFA;            /* --dawn-white */
-  --card: #1A1A1D;                  /* --slate */
-  --card-foreground: #FAFAFA;
-  --popover: #1A1A1D;
-  --popover-foreground: #FAFAFA;
-  --primary: #3B82F6;               /* --signal-blue */
+  /*
+    Sift dark theme. Linear-as-spine. Two token layers:
+      Layer 1: raw domain tokens (the palette, source of truth)
+      Layer 2: semantic aliases (ShadCN role names point at Layer 1)
+    Components consume Layer 2 only, never Layer 1 directly.
+  */
+
+  /* Layer 1: raw domain tokens */
+  --midnight: #0A0A0B;        /* app background, pre-dawn blue-black */
+  --slate: #1A1A1D;           /* cards, sidebar surfaces */
+  --elevated: #222225;        /* hover / active surfaces */
+  --border: #2A2A2D;          /* 1px borders and dividers */
+  --dawn-white: #FAFAFA;      /* primary text */
+  --text-secondary: #A0A0A0;  /* secondary text, metadata */
+  --faint: #8A8A8A;           /* tertiary text, WCAG AA on --midnight */
+  --signal: #5E6AD2;          /* single accent, Linear indigo */
+  --success: #22C55E;         /* "mark useful" confirmation */
+  --warning: #F59E0B;         /* medium-priority status */
+
+  /* Layer 2: semantic aliases (ShadCN role names) */
+  --background: var(--midnight);
+  --foreground: var(--dawn-white);
+  --card: var(--slate);
+  --card-foreground: var(--dawn-white);
+  --popover: var(--slate);
+  --popover-foreground: var(--dawn-white);
+  --primary: var(--signal);
   --primary-foreground: #FFFFFF;
-  --secondary: #222225;             /* --elevated */
-  --secondary-foreground: #FAFAFA;
-  --muted: #222225;
-  --muted-foreground: #A0A0A0;      /* --secondary text */
-  --accent: #222225;
-  --accent-foreground: #FAFAFA;
+  --secondary: var(--elevated);
+  --secondary-foreground: var(--dawn-white);
+  --muted: var(--elevated);
+  --muted-foreground: var(--text-secondary);
+  --accent: var(--elevated);
+  --accent-foreground: var(--dawn-white);
   --destructive: #EF4444;
-  --border: #2A2A2D;                /* 1px borders */
-  --input: #2A2A2D;
-  --ring: #3B82F6;
-  --chart-1: #3B82F6;
-  --chart-2: #22C55E;               /* --success */
-  --chart-3: #F59E0B;               /* --warning */
-  --chart-4: #A0A0A0;
-  --chart-5: #555555;
-  --sidebar: #1A1A1D;               /* --slate */
-  --sidebar-foreground: #FAFAFA;
-  --sidebar-primary: #3B82F6;
+  --input: var(--border);
+  --ring: var(--signal);
+  --chart-1: var(--signal);
+  --chart-2: var(--success);
+  --chart-3: var(--warning);
+  --chart-4: var(--text-secondary);
+  --chart-5: var(--faint);
+  --sidebar: var(--slate);
+  --sidebar-foreground: var(--dawn-white);
+  --sidebar-primary: var(--signal);
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #222225;
-  --sidebar-accent-foreground: #FAFAFA;
-  --sidebar-border: #2A2A2D;
-  --sidebar-ring: #3B82F6;
+  --sidebar-accent: var(--elevated);
+  --sidebar-accent-foreground: var(--dawn-white);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--signal);
 }
 
 @layer base {
