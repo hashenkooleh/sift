@@ -18,6 +18,8 @@ import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Toggle } from "@/components/ui/toggle"
+import { PageHeader } from "@/components/layout/page-header"
+import { Sidebar } from "@/components/layout/sidebar"
 
 const NAV = [
   {
@@ -37,6 +39,13 @@ const NAV = [
       { id: "toggle", label: "Toggle" },
       { id: "tabs", label: "Tabs" },
       { id: "separator", label: "Separator" },
+    ],
+  },
+  {
+    group: "Layout",
+    items: [
+      { id: "sidebar", label: "Sidebar" },
+      { id: "page-header", label: "PageHeader" },
     ],
   },
   {
@@ -115,6 +124,33 @@ const buttonProps = [
     type: "ReactNode",
     def: "—",
     desc: "Label text and/or icon elements.",
+  },
+]
+
+const pageHeaderProps = [
+  {
+    prop: "title",
+    type: "string",
+    def: "—",
+    desc: "Heading text. Rendered as the page's h1.",
+  },
+  {
+    prop: "meta",
+    type: "ReactNode",
+    def: "—",
+    desc: "Optional Geist Mono continuation line — dates, counts, status.",
+  },
+  {
+    prop: "actions",
+    type: "ReactNode",
+    def: "—",
+    desc: "Right-aligned action slot — buttons, a menu trigger, a badge.",
+  },
+  {
+    prop: "className",
+    type: "string",
+    def: "—",
+    desc: "Extra classes merged onto the header container.",
   },
 ]
 
@@ -640,6 +676,89 @@ export default function DesignSystemPage() {
                 </div>
               </div>
             </div>
+          </Section>
+
+          <Section
+            id="sidebar"
+            title="Sidebar"
+            source="src/components/layout/sidebar.tsx"
+          >
+            <p className="mb-6 max-w-prose text-sm text-muted-foreground">
+              The app shell&apos;s primary navigation — a 240px slate panel
+              with a 1px right hairline. The active item is driven by the
+              current route via usePathname and carries aria-current=&quot;page&quot;.
+              At 768px and below it collapses to a 56px icon-only rail.
+            </p>
+
+            <h3 className="mb-3 text-sm font-medium">Expanded (≥768px)</h3>
+            <div className="overflow-hidden rounded-lg border border-border">
+              <div className="flex h-[420px]">
+                <Sidebar />
+                <div className="flex-1 bg-background p-5 font-mono text-xs text-muted-foreground">
+                  Route-driven active state. The item matching the current
+                  path shows an elevated surface, a 2px indigo edge bar, and
+                  a full-opacity glyph.
+                </div>
+              </div>
+            </div>
+
+            <SubHeading>Collapsed rail (≤768px)</SubHeading>
+            <p className="text-xs text-muted-foreground">
+              The same Sidebar collapses to a 56px icon-only rail at the 768px
+              breakpoint — logo wordmark and nav labels hide, the monochrome
+              Lucide glyphs remain. The collapse is a CSS media query on the
+              component itself, so it is shown live: resize the browser below
+              768px to watch the shell switch.
+            </p>
+          </Section>
+
+          <Section
+            id="page-header"
+            title="PageHeader"
+            source="src/components/layout/page-header.tsx"
+          >
+            <p className="mb-6 max-w-prose text-sm text-muted-foreground">
+              The title block at the top of every dashboard screen. Renders a
+              Geist Sans heading, an optional Geist Mono meta line, and a
+              right-aligned actions slot.
+            </p>
+
+            <h3 className="mb-3 text-sm font-medium">States</h3>
+            <Panel>
+              <SpecRow name="title only" note="The minimal header">
+                <div className="w-full">
+                  <PageHeader title="Sources" />
+                </div>
+              </SpecRow>
+              <SpecRow name="with meta" note="Geist Mono continuation line">
+                <div className="w-full">
+                  <PageHeader
+                    title="Today's digest"
+                    meta="14 May 2026 · 5 channels · 42 new messages"
+                  />
+                </div>
+              </SpecRow>
+              <SpecRow name="with actions" note="Right-aligned actions slot">
+                <div className="w-full">
+                  <PageHeader
+                    title="Today's digest"
+                    meta="14 May 2026 · 5 channels"
+                    actions={
+                      <>
+                        <Badge variant="outline">~15 min read</Badge>
+                        <Button size="sm">
+                          <Plus data-icon="inline-start" />
+                          Parse video
+                        </Button>
+                      </>
+                    }
+                  />
+                </div>
+              </SpecRow>
+            </Panel>
+
+            <SubHeading>Props</SubHeading>
+            <PropsTable rows={pageHeaderProps} />
           </Section>
 
           <Section id="flows" title="Flows">

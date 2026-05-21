@@ -4,22 +4,22 @@ Downstream deliverables that haven't been refreshed since their upstream documen
 Computed by reading `.design-engineer-plugin/dependencies.yaml` (the static graph) and
 comparing against recent edits.
 
-- 2026-05-21
+- 2026-05-21 – Development phase 1 (app shell) — user-approved
 
-  **design-references (references.md) informs:** figma-workflow, prototype
+  **Deliverables touched:** sidebar.tsx, page-header.tsx, (dashboard)/layout.tsx,
+  /design-system catalog page (Layout nav group added).
 
-  - figma-workflow: absent on disk (ui-figma-guide was run as an exploratory learning pass
-    this session, not a formal pipeline deliverable) — nothing to refresh.
-  - prototype (prototype.html): exists on disk. prototype.html is intentionally frozen as a
-    throwaway layout reference — old blue accent and Inter font are known deviations, not
-    regressions. Per session context, do NOT flag for update.
+  These are implementation files, not graph deliverables, so the static graph has no
+  `informs:` entries for them directly. One content conflict remains open:
 
-  **design-system.md** is a new Phase 5 dev deliverable. It has no `informs:` entry in the
-  static graph (graph does not model it as an upstream). No stale dependents computed.
+  **references.md** (`.design-engineer-plugin/design/exploration/references.md`) — EXISTS ON DISK.
+  The file describes the active nav item as "підсвічений індиго" (highlighted indigo).
+  The resolved and user-approved treatment is grey elevated surface + 2px `--signal` left-edge bar.
+  Decision is now final — one-line correction can be made any time before Phase 5 wraps.
 
-  **globals.css / token retheme** is implementation, not a graph deliverable.
-  No stale dependents computed via graph.
+  **design-references informs:** figma-workflow, prototype.
+  - figma-workflow: absent on disk (was run as exploratory only, not a formal deliverable) — skip.
+  - prototype.html: intentionally frozen as a throwaway layout reference — do NOT flag for update.
 
-  **Summary:** no actionable stale dependents this session. Placeholder markup in
-  (dashboard)/page.tsx and layout.tsx (off-scale font sizes, duplicated nav className)
-  will self-resolve when real custom components replace them in Phase 5.
+  **Summary:** 1 actionable stale item — references.md needs a one-line correction to the active
+  nav-item description (decision is final, no user input needed).

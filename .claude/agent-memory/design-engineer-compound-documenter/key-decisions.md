@@ -43,6 +43,15 @@ Decisions that affect multiple downstream deliverables. Append-only – older en
 - **Tertiary text raised from #555555 to #8A8A8A (--faint) for WCAG AA** – #555555 on #0A0A0B fails contrast (3.5:1); #8A8A8A passes AA at 4.6:1. Old value logged in memory as a known failure. Affects: globals.css muted token, any component using muted/tertiary text, design-system documentation.
 - **Figma stays a visual helper only; Sift remains code-first** – Figma MCP was connected (OAuth) and prototype pushed to file g8hBtHVY9zHNzuNQH7G1yH as a learning pass. Decision confirmed: Figma is a reference and communication tool, not the source of truth. Affects: ui-figma-guide classification (exploratory, not a pipeline requirement), future workflow expectations.
 
+## 2026-05-21 – Development phase 1 (app shell) — user-approved
+
+- **Active nav-item state: grey elevated surface + 2px `--signal` left-edge bar** – RESOLVED at Phase 1 sign-off. Matches the frozen prototype and Linear's own treatment; an indigo fill would over-signal on a dark background. The 2px indigo left-edge bar provides the accent hit without flooding the surface. Affects: sidebar.tsx, design-system catalog, and references.md (one-line correction still pending — references.md still says "підсвічений індиго").
+- **"Design System" nav item moved to footer group beside Settings** – RESOLVED. Primary nav is now a 3-item triage spine (Digest / Sources / Archive only); Design System is a dev/reference surface, not a daily-use destination. Affects: sidebar.tsx nav structure, any documentation listing primary nav items.
+- **Sift logo wrapped as a link to `/`** – RESOLVED. Standard web convention; clicking the logo resets to the home/Digest view. Affects: sidebar.tsx logo element.
+- **PageHeader exposes a single `actions` prop** – `children` alternative removed as parameter sprawl; a single named slot is cleaner to compose. Affects: page-header.tsx and every screen that renders a page header.
+- **Governing constraint: pure UI/UX pass, no backend** – all Phase 5 Digest-screen work is visual-only interactivity; no Supabase, no real filtering logic. Heavier architecture deferred until UI is test-approved. Affects: mock-data strategy, filter behavior, card actions, modal behavior across all phases of this sub-pipeline.
+- **Playwright verification via MCP + screenshots, not playwright-cli** – `playwright-cli` binary absent in this environment; `tests/*.sh` files stand as written behavioral spec only, not as runnable checks. Affects: all phase verification steps in the Digest-screen sub-pipeline.
+
 ## 2026-05-14 – Phase 2 (strategy)
 
 - **Telegram-bot as digest delivery channel** – ride existing habit rather than building a new surface. Zone A analysis confirmed prompt is the weakest lever; delivery channel is where friction is lowest. Affects: mvp-requirements, ia, storybrand delivery story, all UX flows.

@@ -1,30 +1,32 @@
 # Pipeline state
 
 - **Last updated**: 2026-05-21
-- **Current phase**: Phase 4 complete → Phase 5 (development) starting
-- **Last completed skill**: ui-design-system (3-layer token retheme, globals.css, 8 layout/screen files)
-- **Next skill**: /design-engineer:development – build custom components (DigestCard, Sidebar, SourceRow, FilterDropdown, YouTubeParseModal, TelegramForwardModal) on the Design System page first, then wire into screens
+- **Current phase**: Phase 5 – Development (Digest screen build, 5-phase sub-pipeline)
+- **Last completed skill**: development phase 1 – app shell (sidebar, page-header, dashboard layout, design-system catalog update) — user-approved, ready to commit
+- **Next skill**: development phase 2 – base primitives (Checkbox, Dialog, Popover)
 - **Mode**: guided
 - **Project type**: new
 - **Product name**: Sift
+- **Branch**: feat/nifty-prancing-moore
+- **Plan**: .design-engineer-plugin/plans/2026-05-21-nifty-prancing-moore.md
 - **GitHub**: https://github.com/hashenkooleh/sift
-- **Figma file**: g8hBtHVY9zHNzuNQH7G1yH (prototype pushed for visual reference; Figma is helper only, Sift is code-first)
+- **Figma file**: g8hBtHVY9zHNzuNQH7G1yH (visual helper only, code-first)
 
 ## Recent deliverables (last 8)
 
+- 2026-05-21 – digest-screen-phase-1-app-shell-20260521.md – dev phase 1 documentation – .design-engineer-plugin/design/dev/digest-screen-phase-1-app-shell-20260521.md
+- 2026-05-21 – sidebar.tsx – dev phase 1 app shell – src/components/layout/sidebar.tsx
+- 2026-05-21 – page-header.tsx – dev phase 1 app shell – src/components/layout/page-header.tsx
+- 2026-05-21 – (dashboard)/layout.tsx – dev phase 1 app shell – src/app/(dashboard)/layout.tsx (Sidebar wired in)
 - 2026-05-21 – design-system-retheme-20260521.md – ui-design-system – .design-engineer-plugin/design/dev/design-system-retheme-20260521.md
 - 2026-05-21 – design-system.md – ui-design-system – .design-engineer-plugin/design/dev/design-system.md
 - 2026-05-21 – system.md – ui-design-system – .design-system/system.md
-- 2026-05-21 – references.md (revised) – ui-references-moodboard – .design-engineer-plugin/design/exploration/references.md
-- 2026-05-21 – globals.css rewrite – ui-design-system – src/app/globals.css (3-layer token architecture, 8 files retokenised)
-- 2026-05-20 – lessons-learned-20260520.md – session progress – .design-engineer-plugin/design/dev/lessons-learned-20260520.md
-- 2026-05-20 – product rename DesignPulse → Sift (commit bbc570b) – propagated across 9 files
-- 2026-05-20 – git/GitHub setup – first commit d58050a (52 files), remote origin linked, main pushed
+- 2026-05-21 – globals.css rewrite – ui-design-system – src/app/globals.css (3-layer token architecture)
 
 ## Open questions
 
-- Custom components (DigestCard, Sidebar, SourceRow, FilterDropdown, YouTubeParseModal, TelegramForwardModal) not yet built — still placeholders. Build on /design-system page first per CLAUDE.md rule.
-- Dashboard pages (Digest, Sources, Archive, Settings) remain placeholder scaffolds.
-- Placeholder markup in (dashboard)/page.tsx and layout.tsx has off-scale font sizes and a duplicated nav className — resolves when real components replace placeholders.
-- Theme toggle (Light/Dark) is in prototype + IA, but CLAUDE.md says dark-only for MVP. Flag when Settings screen is built.
-- GitHub repo is public — strategy docs (business-plan.md, competitor-analysis.md) are publicly visible.
+- Playwright test scripts target `playwright-cli` (not installed); phase verification uses Playwright MCP + screenshots instead. `tests/*.sh` files are behavioral spec only.
+- Custom components (DigestCard, FilterDropdown, YouTubeParseModal, TelegramForwardModal, SourceRow, PendingItem) not yet built — Phase 2+.
+- Dashboard pages (Sources, Archive, Settings) remain placeholder scaffolds.
+- Theme toggle (Light/Dark) in prototype + IA; CLAUDE.md is dark-only for MVP — flag when Settings screen is built.
+- references.md still says "підсвічений індиго" for active nav — one-line correction needed (can be done any time before Phase 5 wraps).
