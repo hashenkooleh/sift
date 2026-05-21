@@ -29,6 +29,12 @@ Decisions that affect multiple downstream deliverables. Append-only – older en
 - **Source type badges on cards (TG, YT, Web)** – visual provenance signal on every digest card. Affects: prototype, dev card component.
 - **bias-audit, journey-map, motivation-audit, ethics-review, product-assessment all skipped** – advisor recommendation: overhead not justified for a pet project. Phase 4 shortened to design-references + prototype only. Affects: pipeline sequence (Phase 5 starts directly after prototype).
 
+## 2026-05-20
+
+- **Product renamed DesignPulse → Sift** – old name was descriptive and generic; "Sift" names the core value of sifting signal from noise, more distinctive and memorable. Propagated across 9 files (CLAUDE.md, design deliverables, prototype.html, src/). Telegram bot handle is now @SiftBot, npm package name is "sift". Affects: all naming, copy, tokens, marketing, any future external references.
+- **Accent token renamed --pulse-blue → --signal-blue** – CLAUDE.md requires domain-specific token names; "signal" fits Sift's concept of surfacing signal from noise, "pulse" was tied to the old product name. Affects: globals.css, design-system page, prototype.html, all components using the accent color.
+- **GitHub repo is public** – user chose public over the recommended private repo. Strategy documents (business-plan.md, competitor-analysis.md) are now publicly visible on GitHub. Affects: what external parties can see; treat those files as effectively public going forward.
+
 ## 2026-05-14 – Phase 2 (strategy)
 
 - **Telegram-bot as digest delivery channel** – ride existing habit rather than building a new surface. Zone A analysis confirmed prompt is the weakest lever; delivery channel is where friction is lowest. Affects: mvp-requirements, ia, storybrand delivery story, all UX flows.

@@ -6,12 +6,11 @@ comparing against recent edits.
 
 - 2026-05-20 — No stale dependents.
 
-  Previously (2026-05-14) information-architecture.md was flagged stale because the prototype
-  introduced new patterns (YouTube parse bar, Telegram forward, Pending queue, filter
-  dropdowns per source type). A 2026-05-20 disk review confirmed information-architecture.md
-  already reflects all of these — the Parse video button, the "+" dropdown, the Pending
-  queue section, and per-source-type filter dropdowns are all present in the file. The
-  warning was resolved and is cleared.
+  The product rename (DesignPulse → Sift, commit bbc570b) was fully propagated and
+  verified clean across all 9 affected files before committing. No downstream deliverable
+  was left referencing the old name or old token (--pulse-blue). Nothing is stale.
 
+  Previously cleared (2026-05-20 reconciliation): information-architecture.md was flagged
+  stale against the prototype — confirmed resolved; all patterns present in the file.
   figma-workflow and product-assessment are downstream of prototype per dependencies.yaml
-  but both are absent on disk (skipped in the shortened Phase 4) — nothing to refresh.
+  but absent on disk (skipped in the shortened Phase 4) — nothing to refresh.
