@@ -65,6 +65,13 @@ Decisions that affect multiple downstream deliverables. Append-only – older en
 - **`source-type.ts` extracted as a shared SourceType→{label,icon} map** – the glyph map was duplicated independently in both DigestCard and PendingItem during code review; extracted to a single module to keep badge rendering consistent across all future feed components. Affects: source-type.ts, digest-card.tsx, pending-item.tsx, any future component rendering a source badge.
 - **Card actions are visual-only (Decision 5, UI pass)** – "Mark useful" toggles local green state in React; "View original" and "Hide" are inert no-ops. Real persistence and side-effects deferred to the data/backend phase. Consistent with the governing constraint (pure UI/UX pass). Affects: digest-card.tsx, Phase 5 screen, future card-action backend wiring.
 
+## 2026-05-22 – Development phase 4 (FilterDropdown + modals) — pending user approval
+
+- **`priority.ts` extracted as a shared PRIORITY_DOT color map** – the color map was duplicated in digest-card.tsx and filter-dropdown.tsx during code review; extracted to a single module, same pattern as the Phase-3 source-type.ts extraction. Affects: priority.ts, digest-card.tsx, filter-dropdown.tsx, any future component rendering a priority indicator.
+- **FilterDropdown chevron rotation is CSS-driven (`group-aria-expanded:rotate-180`), not React state** – open/closed state is already encoded in the Popover trigger's `aria-expanded`; CSS reacts to that attribute directly. FilterDropdown is therefore a server component. Affects: filter-dropdown.tsx, Phase 5 Digest screen composition.
+- **Both modals are server components — `"use client"` directive removed** – YouTubeParseModal and TelegramForwardModal only compose client primitives (Dialog, Input, Button) and hold no state of their own; the directive was incorrect and was removed. Affects: youtube-parse-modal.tsx, telegram-forward-modal.tsx, bundle size, and any future modal additions (establish same pattern).
+- **Both modals expose a `trigger: ReactElement` prop projected into `DialogTrigger`'s `render`** – caller passes the opening element; the modal owns the Dialog boundary. Phase 5 wires them by passing the trigger element as a prop. Affects: youtube-parse-modal.tsx, telegram-forward-modal.tsx, Phase 5 Digest screen header wiring.
+
 ## 2026-05-14 – Phase 2 (strategy)
 
 - **Telegram-bot as digest delivery channel** – ride existing habit rather than building a new surface. Zone A analysis confirmed prompt is the weakest lever; delivery channel is where friction is lowest. Affects: mvp-requirements, ia, storybrand delivery story, all UX flows.

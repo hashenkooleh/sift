@@ -38,7 +38,10 @@ import { PageHeader } from "@/components/layout/page-header"
 import { Sidebar } from "@/components/layout/sidebar"
 import { DigestCard } from "@/components/custom/digest-card"
 import { PendingItem } from "@/components/custom/pending-item"
-import { digestEntries, pendingEntries } from "@/lib/mock-data"
+import { FilterDropdown } from "@/components/custom/filter-dropdown"
+import { YouTubeParseModal } from "@/components/custom/youtube-parse-modal"
+import { TelegramForwardModal } from "@/components/custom/telegram-forward-modal"
+import { digestEntries, pendingEntries, sources } from "@/lib/mock-data"
 
 const NAV = [
   {
@@ -75,6 +78,9 @@ const NAV = [
     items: [
       { id: "digest-card", label: "DigestCard" },
       { id: "pending-item", label: "PendingItem" },
+      { id: "filter-dropdown", label: "FilterDropdown" },
+      { id: "youtube-parse-modal", label: "YouTubeParseModal" },
+      { id: "telegram-forward-modal", label: "TelegramForwardModal" },
     ],
   },
   {
@@ -328,6 +334,42 @@ const pendingItemProps = [
     type: "string",
     def: "—",
     desc: "Extra classes merged onto the row.",
+  },
+]
+
+const filterDropdownProps = [
+  {
+    prop: "label",
+    type: "string",
+    def: "—",
+    desc: "Chip label, e.g. \"Telegram\".",
+  },
+  {
+    prop: "count",
+    type: "number",
+    def: "—",
+    desc: "Geist Mono count shown on the chip — the number of channels.",
+  },
+  {
+    prop: "channels",
+    type: "Source[]",
+    def: "—",
+    desc: "Channels listed inside the popover, one checkbox row each. An empty array shows an empty-state line.",
+  },
+  {
+    prop: "className",
+    type: "string",
+    def: "—",
+    desc: "Extra classes merged onto the chip trigger.",
+  },
+]
+
+const modalTriggerProps = [
+  {
+    prop: "trigger",
+    type: "ReactElement",
+    def: "—",
+    desc: "The element that opens the modal — projected into DialogTrigger via its render prop. Pass a Button or any element that takes click + ARIA props.",
   },
 ]
 
@@ -1192,6 +1234,116 @@ export default function DesignSystemPage() {
 
             <SubHeading>Props</SubHeading>
             <PropsTable rows={pendingItemProps} />
+          </Section>
+
+          <Section
+            id="filter-dropdown"
+            title="FilterDropdown"
+            source="src/components/custom/filter-dropdown.tsx"
+          >
+            <p className="mb-6 max-w-prose text-sm text-muted-foreground">
+              A source-type filter for the digest filter bar — a chip carrying
+              a label, a Geist Mono count, and a chevron. Clicking it opens a
+              Popover of per-channel rows; each row is a full-width clickable
+              label, so the row, not the 14px checkbox, is the hit-area. The
+              chevron rotates 180° while the popover is open. Composes the
+              Popover and Checkbox base components. Visual-only — the checkboxes
+              toggle but do not filter a feed.
+            </p>
+
+            <h3 className="mb-3 text-sm font-medium">States</h3>
+            <Panel>
+              <SpecRow
+                name="closed"
+                note="Click the chip to open the channel list"
+              >
+                <FilterDropdown
+                  label="Telegram"
+                  count={sources.length}
+                  channels={sources}
+                />
+              </SpecRow>
+              <SpecRow
+                name="priority dots"
+                note="Each row carries the channel's priority dot — high indigo, medium amber, low faint"
+              >
+                <FilterDropdown
+                  label="Telegram"
+                  count={sources.length}
+                  channels={sources}
+                />
+              </SpecRow>
+              <SpecRow
+                name="empty"
+                note="No channels — an empty-state line replaces the rows"
+              >
+                <FilterDropdown label="YouTube" count={0} channels={[]} />
+              </SpecRow>
+            </Panel>
+
+            <SubHeading>Props</SubHeading>
+            <PropsTable rows={filterDropdownProps} />
+          </Section>
+
+          <Section
+            id="youtube-parse-modal"
+            title="YouTubeParseModal"
+            source="src/components/custom/youtube-parse-modal.tsx"
+          >
+            <p className="mb-6 max-w-prose text-sm text-muted-foreground">
+              The &quot;Parse YouTube video&quot; flow — a Dialog with a Geist
+              Mono URL input and a Parse action. Composes the Dialog base
+              component. The caller passes the opening element through the
+              trigger prop. Visual-only — Parse closes the modal but does not
+              process a URL.
+            </p>
+
+            <h3 className="mb-3 text-sm font-medium">Trigger</h3>
+            <Panel>
+              <SpecRow
+                name="open / close"
+                note="Click to open. Backdrop, Escape, or the X all dismiss it."
+              >
+                <YouTubeParseModal
+                  trigger={<Button variant="outline">Parse video</Button>}
+                />
+              </SpecRow>
+            </Panel>
+
+            <SubHeading>Props</SubHeading>
+            <PropsTable rows={modalTriggerProps} />
+          </Section>
+
+          <Section
+            id="telegram-forward-modal"
+            title="TelegramForwardModal"
+            source="src/components/custom/telegram-forward-modal.tsx"
+          >
+            <p className="mb-6 max-w-prose text-sm text-muted-foreground">
+              The &quot;Forward via Telegram&quot; flow — a Dialog walking the
+              user through the three-step forward, with the @SiftBot relay
+              called out in Geist Mono indigo. Composes the Dialog base
+              component. The caller passes the opening element through the
+              trigger prop. Visual-only — the steps are instructional, there is
+              no submit.
+            </p>
+
+            <h3 className="mb-3 text-sm font-medium">Trigger</h3>
+            <Panel>
+              <SpecRow
+                name="open / close"
+                note="Click to open. Backdrop, Escape, or the X all dismiss it."
+              >
+                <TelegramForwardModal
+                  trigger={
+                    <Button variant="outline">Forward via Telegram</Button>
+                  }
+                />
+              </SpecRow>
+            </Panel>
+
+            <SubHeading>Props</SubHeading>
+            <PropsTable rows={modalTriggerProps} />
           </Section>
 
           <Section id="flows" title="Flows">

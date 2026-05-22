@@ -6,15 +6,9 @@ import type { LucideIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
+import { PRIORITY_DOT } from "@/lib/priority"
 import { SOURCE_TYPE_META } from "@/lib/source-type"
-import type { DigestEntry, Priority } from "@/lib/types"
-
-/** Priority dot color — high indigo, medium amber, low faint grey. */
-const PRIORITY_DOT: Record<Priority, string> = {
-  high: "bg-primary",
-  medium: "bg-chart-3",
-  low: "bg-faint",
-}
+import type { DigestEntry } from "@/lib/types"
 
 export interface DigestCardProps {
   /** The summary-plus-source view model this card renders. */
