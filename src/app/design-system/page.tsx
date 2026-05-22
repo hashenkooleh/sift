@@ -36,6 +36,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Toggle } from "@/components/ui/toggle"
 import { PageHeader } from "@/components/layout/page-header"
 import { Sidebar } from "@/components/layout/sidebar"
+import { DigestCard } from "@/components/custom/digest-card"
+import { PendingItem } from "@/components/custom/pending-item"
+import { digestEntries, pendingEntries } from "@/lib/mock-data"
 
 const NAV = [
   {
@@ -65,6 +68,13 @@ const NAV = [
     items: [
       { id: "sidebar", label: "Sidebar" },
       { id: "page-header", label: "PageHeader" },
+    ],
+  },
+  {
+    group: "Custom",
+    items: [
+      { id: "digest-card", label: "DigestCard" },
+      { id: "pending-item", label: "PendingItem" },
     ],
   },
   {
@@ -282,6 +292,42 @@ const popoverProps = [
     type: "number",
     def: "4",
     desc: "Gap in px between the trigger and PopoverContent.",
+  },
+]
+
+const digestCardProps = [
+  {
+    prop: "entry",
+    type: "DigestEntry",
+    def: "—",
+    desc: "The summary-plus-source view model the card renders — source type, priority, title, summary, timestamp.",
+  },
+  {
+    prop: "entry.markedUseful",
+    type: "boolean",
+    def: "false",
+    desc: "Initial useful-marked state. The card owns the toggle after mount (visual-only).",
+  },
+  {
+    prop: "className",
+    type: "string",
+    def: "—",
+    desc: "Extra classes merged onto the card surface.",
+  },
+]
+
+const pendingItemProps = [
+  {
+    prop: "entry",
+    type: "PendingEntry",
+    def: "—",
+    desc: "The queue item — source type, mono label, status line, and ETA.",
+  },
+  {
+    prop: "className",
+    type: "string",
+    def: "—",
+    desc: "Extra classes merged onto the row.",
   },
 ]
 
@@ -1036,6 +1082,116 @@ export default function DesignSystemPage() {
 
             <SubHeading>Props</SubHeading>
             <PropsTable rows={pageHeaderProps} />
+          </Section>
+
+          <Section
+            id="digest-card"
+            title="DigestCard"
+            source="src/components/custom/digest-card.tsx"
+          >
+            <p className="mb-6 max-w-prose text-sm text-muted-foreground">
+              The signature component — one distilled card in the digest feed.
+              A single bordered surface: a Geist Mono metadata row (priority
+              dot, source-type badge, source attribution, timestamp), a Geist
+              Sans title and summary, and a row of text actions. &quot;Mark
+              useful&quot; toggles its own green state; &quot;View
+              original&quot; and &quot;Hide&quot; are visual-only.
+            </p>
+
+            <h3 className="mb-3 text-sm font-medium">Priority</h3>
+            <Panel>
+              <SpecRow name="high" note="Indigo dot — top of the ranked feed">
+                <DigestCard entry={digestEntries[0]} className="w-full" />
+              </SpecRow>
+              <SpecRow name="medium" note="Amber dot">
+                <DigestCard entry={digestEntries[2]} className="w-full" />
+              </SpecRow>
+              <SpecRow name="low" note="Faint dot — bottom of the feed">
+                <DigestCard entry={digestEntries[3]} className="w-full" />
+              </SpecRow>
+            </Panel>
+
+            <SubHeading>Source type</SubHeading>
+            <Panel>
+              <SpecRow name="telegram" note="TG badge with the Telegram glyph">
+                <DigestCard entry={digestEntries[1]} className="w-full" />
+              </SpecRow>
+              <SpecRow name="youtube" note="YT badge — a parsed video summary">
+                <DigestCard
+                  entry={{
+                    ...digestEntries[0],
+                    id: "ds-digest-yt",
+                    sourceType: "youtube",
+                    sourceName: "Design Details",
+                    sourceHandle: "youtube.com/@designdetails",
+                  }}
+                  className="w-full"
+                />
+              </SpecRow>
+              <SpecRow name="web" note="Web badge — a parsed article summary">
+                <DigestCard
+                  entry={{
+                    ...digestEntries[1],
+                    id: "ds-digest-web",
+                    sourceType: "web",
+                    sourceName: "Smashing Magazine",
+                    sourceHandle: "smashingmagazine.com",
+                  }}
+                  className="w-full"
+                />
+              </SpecRow>
+            </Panel>
+
+            <SubHeading>Useful-marked</SubHeading>
+            <Panel>
+              <SpecRow name="default" note="Mark useful is faint and inert">
+                <DigestCard
+                  entry={{ ...digestEntries[1], markedUseful: false }}
+                  className="w-full"
+                />
+              </SpecRow>
+              <SpecRow
+                name="useful-marked"
+                note="Mark useful turns success green — click to toggle"
+              >
+                <DigestCard
+                  entry={{ ...digestEntries[1], markedUseful: true }}
+                  className="w-full"
+                />
+              </SpecRow>
+            </Panel>
+
+            <SubHeading>Props</SubHeading>
+            <PropsTable rows={digestCardProps} />
+          </Section>
+
+          <Section
+            id="pending-item"
+            title="PendingItem"
+            source="src/components/custom/pending-item.tsx"
+          >
+            <p className="mb-6 max-w-prose text-sm text-muted-foreground">
+              One row in the agent processing queue — a spinner, a Geist Mono
+              source label, a status line, and a Geist Mono ETA. The
+              Linear/Retool &quot;processing&quot; register, shown above the
+              digest feed while the agent is still distilling an item.
+            </p>
+
+            <h3 className="mb-3 text-sm font-medium">States</h3>
+            <Panel>
+              <SpecRow name="youtube" note="A YouTube video being transcribed">
+                <PendingItem entry={pendingEntries[0]} className="w-full" />
+              </SpecRow>
+              <SpecRow
+                name="telegram"
+                note="A forwarded message being summarised"
+              >
+                <PendingItem entry={pendingEntries[1]} className="w-full" />
+              </SpecRow>
+            </Panel>
+
+            <SubHeading>Props</SubHeading>
+            <PropsTable rows={pendingItemProps} />
           </Section>
 
           <Section id="flows" title="Flows">

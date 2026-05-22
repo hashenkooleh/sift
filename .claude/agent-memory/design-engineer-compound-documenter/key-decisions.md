@@ -59,6 +59,12 @@ Decisions that affect multiple downstream deliverables. Append-only – older en
 - **base-ui v1.4.1 API surface locked for Phase 4 composition** – Checkbox forwards `checked`/`defaultChecked`/`onCheckedChange`; Dialog and Popover expose `open`/`onOpenChange` and `className` passthrough. Recording this now so Phase 4 doesn't rediscover the API. Affects: FilterDropdown, YouTubeParseModal, TelegramForwardModal.
 - **Shadows only on Dialog/Popover popups, not on flat surfaces** – consistent with the governing rule (1px border, no card shadow); popups are the one exception because elevation is meaningful there. Affects: dialog.tsx, popover.tsx, and any future popup components.
 
+## 2026-05-22 – Development phase 3 (data layer + DigestCard + PendingItem) — pending user approval
+
+- **DigestEntry / PendingEntry are view-model types, not DB record shapes** – flattened Summary⋈Source projections decoupled from the actual PostgreSQL join shape; feed components receive pre-shaped data and need no knowledge of the DB schema. The mock fixture pre-sorts high→medium→low so Phase 5's digest screen is a pure `.map()` with no sort logic. Affects: types.ts, mock-data.ts, digest-card.tsx, pending-item.tsx, Phase 5 Digest screen, and the eventual real data-fetching layer.
+- **`source-type.ts` extracted as a shared SourceType→{label,icon} map** – the glyph map was duplicated independently in both DigestCard and PendingItem during code review; extracted to a single module to keep badge rendering consistent across all future feed components. Affects: source-type.ts, digest-card.tsx, pending-item.tsx, any future component rendering a source badge.
+- **Card actions are visual-only (Decision 5, UI pass)** – "Mark useful" toggles local green state in React; "View original" and "Hide" are inert no-ops. Real persistence and side-effects deferred to the data/backend phase. Consistent with the governing constraint (pure UI/UX pass). Affects: digest-card.tsx, Phase 5 screen, future card-action backend wiring.
+
 ## 2026-05-14 – Phase 2 (strategy)
 
 - **Telegram-bot as digest delivery channel** – ride existing habit rather than building a new surface. Zone A analysis confirmed prompt is the weakest lever; delivery channel is where friction is lowest. Affects: mvp-requirements, ia, storybrand delivery story, all UX flows.
