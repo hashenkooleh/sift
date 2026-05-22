@@ -14,7 +14,23 @@ import { ArrowRight, LoaderCircle, Plus, Search } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Toggle } from "@/components/ui/toggle"
@@ -36,9 +52,12 @@ const NAV = [
       { id: "button", label: "Button" },
       { id: "badge", label: "Badge" },
       { id: "input", label: "Input" },
+      { id: "checkbox", label: "Checkbox" },
       { id: "toggle", label: "Toggle" },
       { id: "tabs", label: "Tabs" },
       { id: "separator", label: "Separator" },
+      { id: "dialog", label: "Dialog" },
+      { id: "popover", label: "Popover" },
     ],
   },
   {
@@ -159,6 +178,111 @@ const buttonUsage = [
   "Icon-only buttons must carry an aria-label; the icon alone is not an accessible name (WCAG 4.1.2).",
   "For loading, keep the button disabled while the spinner shows — this also blocks double submits.",
   "Reserve destructive for irreversible actions; routine actions use default or outline.",
+]
+
+const checkboxProps = [
+  {
+    prop: "checked",
+    type: "boolean",
+    def: "—",
+    desc: "Controlled checked state. Pair with onCheckedChange.",
+  },
+  {
+    prop: "defaultChecked",
+    type: "boolean",
+    def: "false",
+    desc: "Initial checked state for uncontrolled use.",
+  },
+  {
+    prop: "onCheckedChange",
+    type: "(checked: boolean) => void",
+    def: "—",
+    desc: "Fires when the checked state changes.",
+  },
+  {
+    prop: "indeterminate",
+    type: "boolean",
+    def: "false",
+    desc: "Renders the partially-selected state.",
+  },
+  {
+    prop: "disabled",
+    type: "boolean",
+    def: "false",
+    desc: "Disables interaction; renders at 50% opacity.",
+  },
+]
+
+const dialogProps = [
+  {
+    prop: "open",
+    type: "boolean",
+    def: "—",
+    desc: "Controlled open state on Dialog. Pair with onOpenChange.",
+  },
+  {
+    prop: "defaultOpen",
+    type: "boolean",
+    def: "false",
+    desc: "Initial open state for uncontrolled use.",
+  },
+  {
+    prop: "onOpenChange",
+    type: "(open: boolean) => void",
+    def: "—",
+    desc: "Fires when the dialog opens or closes.",
+  },
+  {
+    prop: "modal",
+    type: "boolean | \"trap-focus\"",
+    def: "true",
+    desc: "Whether the dialog traps focus and blocks the page behind it.",
+  },
+  {
+    prop: "children",
+    type: "ReactNode",
+    def: "—",
+    desc: "Compose DialogTrigger and DialogContent (with DialogTitle, DialogDescription, DialogClose).",
+  },
+]
+
+const popoverProps = [
+  {
+    prop: "open",
+    type: "boolean",
+    def: "—",
+    desc: "Controlled open state on Popover. Pair with onOpenChange.",
+  },
+  {
+    prop: "defaultOpen",
+    type: "boolean",
+    def: "false",
+    desc: "Initial open state for uncontrolled use.",
+  },
+  {
+    prop: "onOpenChange",
+    type: "(open: boolean) => void",
+    def: "—",
+    desc: "Fires when the popover opens or closes.",
+  },
+  {
+    prop: "side",
+    type: '"top" | "right" | "bottom" | "left"',
+    def: '"bottom"',
+    desc: "Which side of the trigger PopoverContent anchors to.",
+  },
+  {
+    prop: "align",
+    type: '"start" | "center" | "end"',
+    def: '"start"',
+    desc: "Alignment of PopoverContent along the chosen side.",
+  },
+  {
+    prop: "sideOffset",
+    type: "number",
+    def: "4",
+    desc: "Gap in px between the trigger and PopoverContent.",
+  },
 ]
 
 function Section({
@@ -574,6 +698,53 @@ export default function DesignSystemPage() {
             </div>
           </Section>
 
+          <Section
+            id="checkbox"
+            title="Checkbox"
+            source="src/components/ui/checkbox.tsx"
+          >
+            <p className="mb-6 max-w-prose text-sm text-muted-foreground">
+              A 14px square box for multi-select controls — the per-channel
+              rows of the filter dropdown. Built on Base UI&apos;s Checkbox.
+              Unchecked is a recessed elevated slot inside a 1px border;
+              checked fills with the indigo accent and shows a Check glyph.
+            </p>
+
+            <h3 className="mb-3 text-sm font-medium">States</h3>
+            <Panel>
+              <SpecRow name="unchecked" note="Default — no value selected">
+                <Checkbox aria-label="Unchecked example" />
+              </SpecRow>
+              <SpecRow name="checked" note="Indigo fill with Check glyph">
+                <Checkbox defaultChecked aria-label="Checked example" />
+              </SpecRow>
+              <SpecRow
+                name="disabled"
+                note="disabled prop — non-interactive, 50% opacity"
+              >
+                <Checkbox disabled aria-label="Disabled unchecked example" />
+                <Checkbox
+                  disabled
+                  defaultChecked
+                  aria-label="Disabled checked example"
+                />
+              </SpecRow>
+              <SpecRow
+                name="in context"
+                note="A filter row — checkbox, priority dot, channel name"
+              >
+                <label className="flex cursor-pointer items-center gap-2 text-sm text-muted-foreground">
+                  <Checkbox defaultChecked />
+                  <span className="size-1.5 rounded-full bg-primary" />
+                  UX Unicorn
+                </label>
+              </SpecRow>
+            </Panel>
+
+            <SubHeading>Props</SubHeading>
+            <PropsTable rows={checkboxProps} />
+          </Section>
+
           <Section id="toggle" title="Toggle" source="src/components/ui/toggle.tsx">
             <Panel>
               <Row label="Variants">
@@ -676,6 +847,112 @@ export default function DesignSystemPage() {
                 </div>
               </div>
             </div>
+          </Section>
+
+          <Section
+            id="dialog"
+            title="Dialog"
+            source="src/components/ui/dialog.tsx"
+          >
+            <p className="mb-6 max-w-prose text-sm text-muted-foreground">
+              A centered modal for focused input — the YouTube parse and
+              Telegram forward flows. Built on Base UI&apos;s Dialog. The popup
+              is one of the two sanctioned shadow surfaces; the backdrop is a
+              plain dimmed overlay. Closes on backdrop click, Escape, and the
+              top-right close button.
+            </p>
+
+            <h3 className="mb-3 text-sm font-medium">Trigger</h3>
+            <Panel>
+              <SpecRow
+                name="open / close"
+                note="Click to open. Backdrop, Escape, or the X all dismiss it."
+              >
+                <Dialog>
+                  <DialogTrigger
+                    render={<Button variant="outline">Open dialog</Button>}
+                  />
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Parse YouTube video</DialogTitle>
+                      <DialogDescription>
+                        The agent extracts the transcript, captures key
+                        screenshots, writes a summary, and adds it to your
+                        digest.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <Input placeholder="Paste YouTube URL..." />
+                    <DialogFooter>
+                      <DialogClose
+                        render={<Button variant="ghost">Cancel</Button>}
+                      />
+                      <DialogClose render={<Button>Parse</Button>} />
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+              </SpecRow>
+            </Panel>
+
+            <SubHeading>Props</SubHeading>
+            <PropsTable rows={dialogProps} />
+          </Section>
+
+          <Section
+            id="popover"
+            title="Popover"
+            source="src/components/ui/popover.tsx"
+          >
+            <p className="mb-6 max-w-prose text-sm text-muted-foreground">
+              An anchored surface for menus and dropdowns — the header
+              &quot;+&quot; menu and the source filter dropdowns. Built on Base
+              UI&apos;s Popover. It anchors to its trigger, carries a shadow,
+              and closes on outside click or Escape.
+            </p>
+
+            <h3 className="mb-3 text-sm font-medium">Trigger</h3>
+            <Panel>
+              <SpecRow
+                name="open / close"
+                note="Click to open. Clicking outside or Escape dismisses it."
+              >
+                <Popover>
+                  <PopoverTrigger
+                    render={<Button variant="outline">Open popover</Button>}
+                  />
+                  <PopoverContent>
+                    <p className="px-2 py-1.5 font-mono text-xs text-muted-foreground">
+                      Anchored to its trigger.
+                    </p>
+                  </PopoverContent>
+                </Popover>
+              </SpecRow>
+              <SpecRow
+                name="with content"
+                note="Composes other base components — here, checkbox rows"
+              >
+                <Popover>
+                  <PopoverTrigger
+                    render={<Button variant="outline">Telegram</Button>}
+                  />
+                  <PopoverContent>
+                    {["UX Unicorn", "Design Systems Hub", "AI for Design"].map(
+                      (channel) => (
+                        <label
+                          key={channel}
+                          className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm text-muted-foreground hover:bg-muted"
+                        >
+                          <Checkbox defaultChecked />
+                          {channel}
+                        </label>
+                      )
+                    )}
+                  </PopoverContent>
+                </Popover>
+              </SpecRow>
+            </Panel>
+
+            <SubHeading>Props</SubHeading>
+            <PropsTable rows={popoverProps} />
           </Section>
 
           <Section

@@ -52,6 +52,13 @@ Decisions that affect multiple downstream deliverables. Append-only – older en
 - **Governing constraint: pure UI/UX pass, no backend** – all Phase 5 Digest-screen work is visual-only interactivity; no Supabase, no real filtering logic. Heavier architecture deferred until UI is test-approved. Affects: mock-data strategy, filter behavior, card actions, modal behavior across all phases of this sub-pipeline.
 - **Playwright verification via MCP + screenshots, not playwright-cli** – `playwright-cli` binary absent in this environment; `tests/*.sh` files stand as written behavioral spec only, not as runnable checks. Affects: all phase verification steps in the Digest-screen sub-pipeline.
 
+## 2026-05-22 – Development phase 2 (base primitives) — pending user approval
+
+- **Dialog exports `DialogHeader`/`DialogFooter` layout helpers** – not in the plan's literal component list, but the plan said "export the composable parts"; these helpers keep Phase 4 modal composition consistent and avoid re-inventing layout scaffolding in each modal. Affects: dialog.tsx, YouTubeParseModal, TelegramForwardModal.
+- **Checkbox box is 14px (`size-3.5`), deliberately sub-8px-grid** – matches the prototype's `.filter-option` checkbox exactly; visual regression over ergonomics was an intentional product call. Affects: checkbox.tsx, FilterDropdown checkbox rows (Phase 3+). Carry-forward: FilterDropdown rows must be full-row `<label>` hit-areas to compensate.
+- **base-ui v1.4.1 API surface locked for Phase 4 composition** – Checkbox forwards `checked`/`defaultChecked`/`onCheckedChange`; Dialog and Popover expose `open`/`onOpenChange` and `className` passthrough. Recording this now so Phase 4 doesn't rediscover the API. Affects: FilterDropdown, YouTubeParseModal, TelegramForwardModal.
+- **Shadows only on Dialog/Popover popups, not on flat surfaces** – consistent with the governing rule (1px border, no card shadow); popups are the one exception because elevation is meaningful there. Affects: dialog.tsx, popover.tsx, and any future popup components.
+
 ## 2026-05-14 – Phase 2 (strategy)
 
 - **Telegram-bot as digest delivery channel** – ride existing habit rather than building a new surface. Zone A analysis confirmed prompt is the weakest lever; delivery channel is where friction is lowest. Affects: mvp-requirements, ia, storybrand delivery story, all UX flows.
