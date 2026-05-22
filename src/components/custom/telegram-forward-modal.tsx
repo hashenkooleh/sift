@@ -12,9 +12,14 @@ import {
 export interface TelegramForwardModalProps {
   /**
    * The element that opens the modal — projected into DialogTrigger via its
-   * render prop. Phase 5 passes the "+" menu's "Forward via Telegram" row here.
+   * render prop. Omit it when driving the modal with the controlled
+   * `open` / `onOpenChange` pair.
    */
-  trigger: ReactElement
+  trigger?: ReactElement
+  /** Controlled open state. When set, the modal is driven externally. */
+  open?: boolean
+  /** Open-state change handler, paired with `open`. */
+  onOpenChange?: (open: boolean) => void
 }
 
 /**
@@ -49,10 +54,12 @@ const STEPS: { title: { text: string; mono?: boolean }[]; description: string }[
  */
 export function TelegramForwardModal({
   trigger,
+  open,
+  onOpenChange,
 }: TelegramForwardModalProps) {
   return (
-    <Dialog>
-      <DialogTrigger render={trigger} />
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      {trigger ? <DialogTrigger render={trigger} /> : null}
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Forward via Telegram</DialogTitle>

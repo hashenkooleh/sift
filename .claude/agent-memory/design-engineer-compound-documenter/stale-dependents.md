@@ -4,16 +4,35 @@ Downstream deliverables that haven't been refreshed since their upstream documen
 Computed by reading `.design-engineer-plugin/dependencies.yaml` (the static graph) and
 comparing against recent edits.
 
-- 2026-05-22 – Development phase 4 (FilterDropdown + modals) — pending user approval
+- 2026-05-22 – Development phase 5 (Digest screen assembly) — pending user approval
 
-  **Deliverables touched:** src/components/custom/filter-dropdown.tsx,
-  src/components/custom/youtube-parse-modal.tsx,
-  src/components/custom/telegram-forward-modal.tsx,
-  src/lib/priority.ts.
-  All four documented on /design-system catalog.
+  **Deliverables touched:** src/app/(dashboard)/page.tsx,
+  src/app/(dashboard)/digest-header-actions.tsx.
+  Both documented on /design-system catalog as appropriate.
 
   These are implementation files, not graph deliverables — the static graph has no `informs:`
   entries for them directly. No new stale design-layer items introduced this phase.
+
+  **Psych-scanner screen-level findings deferred to a future product-design iteration**
+  (not actioned — conflict with prototype-fidelity constraint and user's locked Decision 1;
+  recorded here so they are not lost):
+
+  - Digest screen leads with chrome (search, filters, "Today's highlights" placeholder,
+    Processing queue) before the ranked feed — psych-scanner argues the top-priority card
+    should be the first substantive thing seen. Current order follows the prototype + the
+    approved plan.
+  - "Today's highlights" dashed placeholder occupies above-the-fold space daily —
+    psych-scanner suggests removing or shrinking it. It exists by the user's explicit Decision 1
+    (static placeholder slot).
+  - Two capture affordances ("Parse video" button + "+" menu) — psych-scanner suggests
+    consolidating to one; the prototype and IA keep them separate.
+  - Empty YouTube/Web FilterDropdowns render with count 0 — psych-scanner suggests
+    hiding/disabling; the prototype + IA intentionally show them as "UI prepared for future
+    source types".
+  - No end-of-digest marker — psych-scanner suggests a "that's everything" closure cue at the
+    feed's end.
+
+- 2026-05-22 – Development phase 4 (FilterDropdown + modals) — pending user approval (carried forward)
 
   **Psych-scanner findings deferred to data/backend phase** (not actioned in this UI pass —
   recorded here so they are not lost when the data phase begins):
@@ -25,16 +44,6 @@ comparing against recent edits.
     URL parsing behavior.
   - YouTubeParseModal "Parse" action needs a loading/queued feedback state once it does real
     async work (spinner, disabled state during request).
-
-  **Phase 5 carry-forward notes** (from advisor — must not be forgotten when building
-  `(dashboard)/page.tsx`):
-
-  - Keep `(dashboard)/page.tsx` a server component. Isolate the interactive header actions
-    (Parse video button + the "+" Popover menu) into one small client component; pass
-    server-rendered fixtures as props to client leaves.
-  - Popover-then-Dialog nesting risk: the "+" menu is a Popover and one of its rows opens
-    TelegramForwardModal (a Dialog). Popover-then-Dialog can trap focus. Test that
-    interaction explicitly in Phase 5 before sign-off.
 
 - 2026-05-22 – Development phase 3 (data layer + DigestCard + PendingItem) — user-approved (carried forward)
 
